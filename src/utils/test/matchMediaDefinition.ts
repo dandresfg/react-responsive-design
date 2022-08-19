@@ -4,7 +4,7 @@ const matchMediaDefinition = () => {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: vi.fn().mockImplementation((query) => {
-      const values = query.match(/\d*(?=px)/g);
+      const values = query.match(/\d*(?=px)/g); //This regex takes the digits before 'px'
       return {
         matches:
           Number(values[0]) < window.innerWidth &&
