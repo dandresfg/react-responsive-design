@@ -16,6 +16,10 @@ describe("Hidden Component", () => {
 
   beforeAll(() => {
     matchMediaDefinition();
+    window.resizeTo = resizeToDefinition;
+    window.addEventListener("resize", () =>
+      console.log("Resized to: " + window.innerWidth)
+    );
   });
 
   it("Should render", () => {
@@ -59,7 +63,6 @@ describe("Hidden Component", () => {
       ).toBeTruthy();
 
       //Resize event
-      window.resizeTo = resizeToDefinition;
       window.resizeTo(500, 500);
       fireEvent(window, new Event("resize"));
 
@@ -85,7 +88,6 @@ describe("Hidden Component", () => {
       ).toBeTruthy();
 
       //Resize event
-      window.resizeTo = resizeToDefinition;
       window.resizeTo(800, 500);
       fireEvent(window, new Event("resize"));
 
@@ -111,7 +113,6 @@ describe("Hidden Component", () => {
       ).toBeTruthy();
 
       //Resize event
-      window.resizeTo = resizeToDefinition;
       window.resizeTo(1000, 500);
       fireEvent(window, new Event("resize"));
 
@@ -137,7 +138,6 @@ describe("Hidden Component", () => {
       ).toBeTruthy();
 
       //Resize event
-      window.resizeTo = resizeToDefinition;
       window.resizeTo(1400, 500);
       fireEvent(window, new Event("resize"));
 
@@ -145,5 +145,49 @@ describe("Hidden Component", () => {
         parentComponent.getElementsByTagName("p"),
         "Hidden shouldn't render on Extra Large Breakpoints"
       ).length(0);
+    }),
+    it("Shouldn't render on 'sm' and 'lg'", () => {
+      //This is tricky because sm is from 0 to 600 and lg is 992 to 1200
+      const hiddenComponent = render(
+        <div role="parent">
+          <Hidden media={["sm", "lg"]}>
+            <p>Hello From Hidden out of Small and Large</p>
+          </Hidden>
+        </div>
+      );
+      const parentComponent = hiddenComponent.getByRole("parent");
+
+      //More than large so we know that it will render
+      expect(window.innerWidth).toBeGreaterThan(1200);
+
+      expect(
+        hiddenComponent.getByText("Hello From Hidden out of Small and Large"),
+        "Hidden should render on all breakpoints greater than Large"
+      ).toBeTruthy();
+
+      //Resize event to below small
+      window.resizeTo(500, 500);
+      fireEvent(window, new Event("resize"));
+
+      //Less than small so we know that it will not render
+      expect(window.innerWidth).toBeLessThan(600);
+
+      expect(
+        parentComponent.getElementsByTagName("p"),
+        "Hidden shouldn't render on Small Breakpoint"
+      ).length(0);
+
+      //Resize event to the breakpoint range
+      window.resizeTo(800, 500);
+      fireEvent(window, new Event("resize"));
+
+      //Greater than small but less than medium so we know that it will render
+      expect(window.innerWidth).toBeGreaterThan(600);
+      expect(window.innerWidth).toBeLessThan(992);
+
+      expect(
+        screen.getByText("Hello From Hidden out of Small and Large"),
+        "Hidden should render on all breakpoints between 600px and 992px"
+      ).toBeTruthy();
     });
 });
