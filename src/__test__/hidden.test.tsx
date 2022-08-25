@@ -106,13 +106,13 @@ describe("Hidden Component", () => {
     }),
     it("Shouldn't render on 'md' media query", () => {
       const hiddenComponent = render(
-        <div role="parent">
-          <MediaProvider>
+        <MediaProvider>
+          <div role="parent">
             <Hidden media="md">
               <p>Hello From Hidden out of Medium Query</p>
             </Hidden>
-          </MediaProvider>
-        </div>
+          </div>
+        </MediaProvider>
       );
 
       const parentComponent = hiddenComponent.getByRole("parent");
@@ -133,13 +133,13 @@ describe("Hidden Component", () => {
     }),
     it("Shouldn't render on 'lg' media query", () => {
       const hiddenComponent = render(
-        <div role="parent">
-          <MediaProvider>
+        <MediaProvider>
+          <div role="parent">
             <Hidden media="lg">
               <p>Hello From Hidden out of Large Query</p>
             </Hidden>
-          </MediaProvider>
-        </div>
+          </div>
+        </MediaProvider>
       );
 
       const parentComponent = hiddenComponent.getByRole("parent");
@@ -160,13 +160,13 @@ describe("Hidden Component", () => {
     }),
     it("Shouldn't render on 'xl' media query", () => {
       const hiddenComponent = render(
-        <div role="parent">
-          <MediaProvider>
+        <MediaProvider>
+          <div role="parent">
             <Hidden media="xl">
               <p>Hello From Hidden out of Extra Large Query</p>
             </Hidden>
-          </MediaProvider>
-        </div>
+          </div>
+        </MediaProvider>
       );
 
       const parentComponent = hiddenComponent.getByRole("parent");
@@ -186,15 +186,15 @@ describe("Hidden Component", () => {
       ).length(0);
     }),
     it("Shouldn't render on 'sm' and 'lg'", () => {
-      //This is tricky because sm is from 0 to 600 and lg is 992 to 1200
+      //This is tricky because sm is from 600 to 900 and lg is 1200 to 1536
       const hiddenComponent = render(
-        <div role="parent">
-          <MediaProvider>
+        <MediaProvider>
+          <div role="parent">
             <Hidden media={["sm", "lg"]}>
               <p>Hello From Hidden out of Small and Large</p>
             </Hidden>
-          </MediaProvider>
-        </div>
+          </div>
+        </MediaProvider>
       );
       const parentComponent = hiddenComponent.getByRole("parent");
 
@@ -228,7 +228,7 @@ describe("Hidden Component", () => {
 
       expect(
         screen.getByText("Hello From Hidden out of Small and Large"),
-        "Hidden should render on all breakpoints between 600px and 992px"
+        "Hidden should render on all breakpoints between 900px and 1200px"
       ).toBeTruthy();
     });
 });
