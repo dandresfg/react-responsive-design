@@ -1,24 +1,18 @@
-import Hidden from "./lib/hidden"
-
-const Button = (props: any) => {
-  return (
-    <button>Presiona si eres: {props.children}</button>
-  )
-}
+import { Hidden, MediaProvider } from "./lib";
 
 function App() {
   return (
-    <div>
-      <section>
-        <Hidden media={["sm", "lg"]}>
-          <p>Hola soy</p>
-        </Hidden>
-        <Hidden component={Button} media={"md"}>
-          Skywalker
-        </Hidden>
-      </section>
-    </div>
-  )
+    <section>
+      <Hidden media="xs">{" im out of context check console"}</Hidden>
+      {/* Both can be read in xs and xl */}
+      <MediaProvider>
+        <p>
+          <Hidden media={["sm", "lg"]}>{" im out of sm or lg"}</Hidden>
+          <Hidden media={"md"}>{" im out of md "}</Hidden>
+        </p>
+      </MediaProvider>
+    </section>
+  );
 }
 
-export default App
+export default App;
