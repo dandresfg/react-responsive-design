@@ -1,9 +1,16 @@
-import { useContext } from "react"
-import { MediaContext } from "../theme/theme"
+import { useContext } from "react";
+import { MediaContext } from "../theme/theme";
 
 const useBreakpoint = () => {
-    const breakpoint = useContext(MediaContext)
-    return breakpoint
-}
+  const breakpoint = useContext(MediaContext);
 
-export default useBreakpoint
+  if (!breakpoint.trim().length)
+    console.warn(
+      `Components must have a MediaProvider as context at the top level.
+      Your components will not work as expected`
+    );
+
+  return breakpoint;
+};
+
+export default useBreakpoint;
