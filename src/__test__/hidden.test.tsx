@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeAll, afterEach } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import Hidden from "../lib/hidden";
-import matchMediaDefinition from "../utils/test/matchMediaDefinition";
 import resizeToDefinition from "../utils/test/resizeToDefinition";
 import { MediaProvider } from "../lib";
 
@@ -16,7 +15,6 @@ describe("Hidden Component", () => {
   afterEach(cleanup);
 
   beforeAll(() => {
-    matchMediaDefinition();
     window.resizeTo = resizeToDefinition;
   });
 
