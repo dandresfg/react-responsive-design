@@ -1,15 +1,19 @@
 import { MediaChildren } from "../common/types";
-import useBreakpoint from "../hooks/useBreakpoint"
+import useBreakpoint from "../hooks/useBreakpoint";
 
 const Show: React.FC<MediaChildren> = (props) => {
-    const breakpoint = useBreakpoint();
+  const breakpoint = useBreakpoint();
 
-    // Hidden
-    if (Array.isArray(props.media) && props.media.every(media => media !== breakpoint) || props.media !== breakpoint) {
-        return null;
-    }
+  // Show
+  if (
+    (Array.isArray(props.media) &&
+      props.media.some((media) => media == breakpoint)) ||
+    props.media == breakpoint
+  ) {
+    return props.children;
+  }
 
-    return props.children
-}
+  return null;
+};
 
-export default Show 
+export default Show;
