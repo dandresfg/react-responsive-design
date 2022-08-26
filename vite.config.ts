@@ -10,6 +10,10 @@ export default defineConfig({
       include: "**/*.tsx",
     }),
   ],
+  server: {
+    host: 'localhost',
+    port: 4000
+  },
   test: {
     globals: true,
     environment: `jsdom`,
