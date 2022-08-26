@@ -1,23 +1,15 @@
-// Hooks
-import useMatch from "../hooks/useMatch"
-import { breakpoint, display } from "../theme/breakpoints"
-import { createElement } from "react"
+import { MediaChildren } from "../common/types";
+import useBreakpoint from "../hooks/useBreakpoint"
 
-type HiddenMedia = {
-    media: breakpoint | breakpoint[]
-    component?: string | React.ComponentType | React.FC
-    display?: display
-    children?: React.ReactNode
-}
+const Hidden: React.FC<MediaChildren> = (props) => {
+    const breakpoint = useBreakpoint();
 
-function Hidden(props: HiddenMedia) {
-    const inside = useMatch(props.media)
-
-    if (!props.children || inside){
+    // Hidden
+    if(Array.isArray(props.media) && props.media.some(media => media === breakpoint) || props.media === breakpoint){
         return null;
     }
-
-    return createElement(props.component || "div", props as React.Attributes, props.children)
+    
+    return props.children
 }
 
-export default Hidden
+export default Hidden 
