@@ -1,8 +1,8 @@
 {
   "name": "react-responsive-design",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
-  "main": "src/lib/index.tsx",
+  "module": "dist/react-responsive-design.js",
   "author": {
     "name": "Diego Finol",
     "email": "dandresfg@gmail.com"
