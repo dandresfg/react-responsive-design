@@ -1,8 +1,28 @@
 {
-  "name": "react-responsive",
-  "private": true,
-  "version": "0.0.0",
+  "name": "react-responsive-design",
+  "version": "0.1.0",
   "type": "module",
+  "main": "src/lib/index.tsx",
+  "author": {
+    "name": "Diego Finol",
+    "email": "dandresfg@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Jalinson Diaz",
+      "email": "zjaaaldev@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/dandresfg/react-responsive-design#readme",
+  "keywords": [
+    "responsive",
+    "react-responsive",
+    "react-component",
+    "media queries",
+    "hidden",
+    "responsive-design",
+    "responsive components"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

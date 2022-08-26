@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { breakpoint, breakpointList } from "../theme/breakpoints";
 
-const getBreakpoint = (
-  width: number,
-  breakpoints: breakpointList
-): breakpoint => {
+const getBreakpoint = (width: number, breakpoints: breakpointList): breakpoint => {
   // biggest breakpoint
   const greatestbkpt = breakpoints["2xl"] || breakpoints["xl"];
 
@@ -14,19 +11,18 @@ const getBreakpoint = (
     return breakpoints["2xl"] ? "2xl" : "xl";
   }
 
-  const keys = Object.keys(breakpoints);
-  const bkpts = keys
-    .slice(1, breakpoints["2xl"] ? keys.length - 1 : keys.length - 2)
-    .reverse();
-  for (let i = 0; i < bkpts.length; i++) {
-    const point = bkpts[i] as breakpoint;
-    if (width > breakpoints[point]) {
+  const keys = Object.keys(breakpoints).filter((key) => breakpoints[key as breakpoint] !== undefined);
+  const bkpts = keys.slice(1, keys.length - 1).reverse() as breakpoint[];
+
+  for (let i = 0; i < bkpts.length-1; i++) {
+    const point: keyof typeof breakpoints = bkpts[i];
+    if (width >= (breakpoints[point] as number)) {
       return point;
     }
   }
 
   // base case
-  return "xs";
+  return bkpts[bkpts.length-1];
 };
 
 function useMediaBreakpoint(breakpoints: breakpointList) {
