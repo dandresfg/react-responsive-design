@@ -1,37 +1,37 @@
-import { createContext, useMemo } from "react"
-import { ReactChildren } from "../common/types"
-import useBreakpoint from "../hooks/useMediaBreakpoint"
-import { breakpoint, breakpointList, breakpointOptions, defaultBreakpoints } from "./breakpoints"
+import { createContext, useMemo } from "react";
+import { ReactChildren } from "../common/types";
+import useBreakpoint from "../hooks/useMediaBreakpoint";
+import breakpointsDefinitions, { breakpointOptions } from "./breakpointOptions";
+import { breakpoint, breakpointList, defaultBreakpoints } from "./breakpoints";
 
-interface IThemeProps extends ReactChildren{
-    mode?: breakpointOptions,
-    breakpoints?: breakpointList
+interface IThemeProps extends ReactChildren {
+  breakpoints?: breakpointOptions | breakpointList;
 }
 
 export const MediaContext = createContext<breakpoint>("" as breakpoint);
 
 function MediaProvider(props: IThemeProps) {
+  const getBreakpointList = useMemo<breakpointList>(() => {
+    if (props.breakpoints) {
+      if (typeof props.breakpoints == "string") {
+        return (
+          breakpointsDefinitions[props.breakpoints] ||
+          breakpointsDefinitions["material"]
+        );
+      }
+      //Here should go a validation for breakpointList
+    }
 
-    const getBreakpointList = useMemo<breakpointList>(() => {
-        if (props.mode){
-            // Support to settup pre-loaded endpoints
-        }
+    return breakpointsDefinitions["material"];
+  }, [props.breakpoints]);
 
-
-        // Provide a valid breakpoint object
-        // if(typeof props.breakpoints !== "object"){
-        // }
-
-        return props.breakpoints || defaultBreakpoints
-    }, [props.mode, props.breakpoints])
-
-    const breakpoint = useBreakpoint(getBreakpointList);
-
-    return (
-        <MediaContext.Provider value={breakpoint}>
-            {props.children}
-        </MediaContext.Provider>
-    )
+  const breakpoint = useBreakpoint(getBreakpointList);
+  console.log(breakpoint);
+  return (
+    <MediaContext.Provider value={breakpoint}>
+      {props.children}
+    </MediaContext.Provider>
+  );
 }
 
-export default MediaProvider
+export default MediaProvider;
