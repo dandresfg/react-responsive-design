@@ -1,8 +1,8 @@
 import { breakpointList } from "./breakpoints";
 
 export type breakpointOptions =
-  // | "ant-design" | "chakra"
-  "bootstrap" | "bulma" | "material" | "tailwind";
+  // | "ant-design"
+  "bootstrap" | "bulma" | "chakra" | "material" | "tailwind";
 
 type BreakpointsDefinitions = {
   [key: string]: breakpointList;
@@ -32,13 +32,14 @@ const breakpointsDefinitions: BreakpointsDefinitions = {
     lg: 1216,
     xl: 1408,
   },
-  // chakra: {
-  //   sm: '30em',
-  //   md: '48em',
-  //   lg: '62em',
-  //   xl: '80em',
-  //   '2xl': '96em',
-  // },
+  chakra: {
+    xs: 0,
+    sm: 480,
+    md: 768,
+    lg: 992,
+    xl: 1280,
+    "2xl": 1536,
+  },
   material: {
     xs: 0,
     sm: 600,
