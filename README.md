@@ -1,12 +1,12 @@
 # react-responsive-design
-This library saves your time when you deal with responsive design, we know you have to hidde components in desktop or mobile, and that might be difficult when you have to mix a lot of classnames in the same component, and it makes your code less reusable, that's why you have to use react-responsive-design. It's made to separate your hidden logic from your components.
+This library saves your time when you deal with responsive design, we know you have to hide components in desktop or mobile, and that might be difficult when you have to mix a lot of classNames in the same component, and it makes your code less reusable, that's why you have to use react-responsive-design. It's made to separate your hidden logic from your components.
 
 
 # Installation
 ```javascript
 npm install react-native-design
 ```
-**requirements:** This library is made for React projects, you can use any library after v16, we use hooks to calculate the breakpoints.
+**Requirements:** This library is made for React projects, you have to use React v16 or newer since we use hooks to calculate the breakpoints.
 
 
 
@@ -59,4 +59,4 @@ const Button = () => {
 ```
 
 ## Change log
-We are working to provide more customization to the components. This is the first version of the package, we gonna add other features like a Media component to indicate the initial and last range, even a replace component to show when the widgth triggers the breakpoint target.
+We are working to provide more customization to the components. This is the first version of the package, we gonna add other features like a Media component to indicate the initial and last range, even a replace component to show when the width triggers the breakpoint target.
